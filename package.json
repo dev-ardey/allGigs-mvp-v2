@@ -1,0 +1,21 @@
+{
+  "dependencies": {
+    "@fontsource/montserrat": "^5.2.5",
+    "@supabase/supabase-js": "^2.49.8",
+    "@vercel/speed-insights": "^1.2.0",
+    "dotenv": "^16.5.0",
+    "fuse.js": "^7.1.0",
+    "next": "^15.3.2",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "devDependencies": {
+    "@types/react": "19.1.6",
+    "typescript": "5.8.3"
+  }
+}

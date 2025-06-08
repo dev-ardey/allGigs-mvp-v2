@@ -1,0 +1,248 @@
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  /* background: #f7f7fa; */
+    background: #121f36;
+  margin: 0;
+  /* color: #222; */
+    color: #222;
+}
+
+.job-board-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.job-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.job-header h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  /* color: #3b3b3b; */
+    color: white;
+
+  margin-bottom: 0.5rem;
+}
+
+.job-header p {
+  /* color: #666; */
+  color: #c8c8c8;
+  font-size: 1.2rem;
+}
+
+.job-filters {
+  /* background: #fff; */
+  /* border-radius: 16px; */
+  /* box-shadow: 0 2px 8px rgba(0,0,0,0.06); */
+  /* border: 1px solid #e5e7eb; */
+  margin-bottom: 2rem;
+  padding: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.job-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.job-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: 1px solid #e5e7eb;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+
+  word-wrap: break-word;       /* breekt woorden die te lang zijn */
+  overflow-wrap: break-word;   /* moderne variant */
+  hyphens: auto;               /* optioneel: voeg streepjes toe bij afbreken */
+}
+
+.job-main {
+  flex: 1;
+}
+
+.job-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.job-company {
+  color: #555;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.job-details {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #666;
+}
+
+.job-summary {
+  color: #444;
+  font-size: 1rem;
+  background: #f3f4f6;
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+}
+
+.view-job-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  background: #4f46e5;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.view-job-btn:hover {
+  background: #3730a3;
+}
+
+.job-id {
+  font-size: 0.8rem;
+  color: #888;
+  background: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid #eee;
+  margin-top: 1rem;
+  display: inline-block;
+}
+
+
+.job-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000; /* zwart */
+  margin-bottom: 0.5rem;
+}
+
+.job-company,
+.job-details span,
+.job-id {
+  color: #666; /* grijs voor alle tekst behalve titel */
+}
+
+/* pill-styling voor rate, location, etc. */
+.job-pill {
+  background: #f3f4f6;
+  color: #000;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  border: 1px solid #e5e7eb;
+  width: fit-content;
+}
+
+/* card buttons in #0ccf83 */
+.job-card button,
+.job-card a.view-job-btn {
+  background: #0ccf83;
+  color: #000;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 0.6rem 1.4rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.job-card button:hover,
+.job-card a.view-job-btn:hover {
+  opacity: 0.85;
+}
+
+.job-pill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.job-pill {
+  background: #f3f4f6;
+  color: #000;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  border: 1px solid #e5e7eb;
+  margin: 0;
+  display: inline-block;
+  white-space: normal;         
+  max-width: 100%;             
+  word-wrap: break-word;       
+
+}
+
+.industry-header {
+  position: relative; /* belangrijk */
+  width: 100%;         /* volle breedte */
+  margin-bottom: 1rem;
+}
+
+.industry-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #222;
+  margin: 0;
+}
+
+.industry-select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #333;
+}
+
+
+
+.allGigs-lightning {
+  color:#0ccf83;
+}
+
+/* extra lange links in main title afbreken */
+.job-main h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.job-main p {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.view-job-btn {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
