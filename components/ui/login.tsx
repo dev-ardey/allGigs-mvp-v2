@@ -13,203 +13,130 @@ export default function LoginForm() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setMessage("");
+
     if (mode === "login") {
-      const { error: loginError } = await supabase.auth.signInWithPassword({ email, password });
-      setMessage(loginError ? loginError.message : "Logged in!");
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      setMessage(error ? error.message : "Logged in!");
     } else if (mode === "signup") {
-      const { data, error: signupError } = await supabase.auth.signUp({ email, password });
-      if (!signupError && data.user) {
-        // Insert profile info
-        await supabase.from("profiles").insert([
-          {
-            id: data.user.id,
-            name,
-            surname,
-            linkedin,
-          },
-        ]);
+      const { data, error } = await supabase.auth.signUp({ email, password });
+      if (!error && data.user) {
+        await supabase.from("profiles").insert([{ id: data.user.id, name, surname, linkedin }]);
       }
-      setMessage(signupError ? signupError.message : "Check your email to confirm your account!");
+      setMessage(error ? error.message : "Check your email to confirm your account!");
     } else if (mode === "forgot") {
-      try {
-        const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-          redirectTo: `${window.location.origin}/auth/callback?next=/jobs`
-        });
-        if (resetError) {
-          console.error("Password reset error:", resetError);
-          setMessage(`Error: ${resetError.message}`);
-        } else {
-          setMessage("Password reset email sent! Please check your inbox and spam folder.");
-        }
-      } catch (error) {
-        console.error("Unexpected error during password reset:", error);
-        setMessage("An unexpected error occurred. Please try again.");
-      }
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/auth/callback?next=/jobs`,
+      });
+      setMessage(error ? `Error: ${error.message}` : "Password reset email sent!");
     }
   };
 
   return (
-    <form
-      onSubmit={handleLogin}
-      style={{
-        maxWidth: 400,
-        margin: "2rem auto",
-        padding: 24,
-        borderRadius: 8,
-        background: "#fff",
-        boxShadow: "0 2px 8px rgba(0,0,0,0.07)",
-      }}
-    >
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        required
-        onChange={e => setEmail(e.target.value)}
-        style={{
-          width: "100%",
-          marginBottom: 12,
-          padding: 8,
-          borderRadius: 6,
-          border: "1px solid #ccc",
-        }}
-      />
+    <div className="job-board-container" style={{ maxWidth: 420, margin: "4rem auto", textAlign: "center" }}>
+      <img src="/images/allGigs-logo-white.svg" alt="AllGigs Logo" style={{ height: "70px", marginBottom: "1.5rem" }} />
+      <p style={{
+        color: "#c8c8c8",
+        fontSize: "1.1rem",
+        marginBottom: "2rem",
+        whiteSpace: "normal",
+        overflowWrap: "break-word",
+        wordBreak: "break-word",
+        lineHeight: 1.6,
+        maxWidth: "100%",
+        textAlign: "center"
+      }}>
+        Discover your next opportunity from <span style={{ fontWeight: "bold", color: "#0ccf83" }}>1000+</span> curated positions
+      </p>
 
-      {mode === "signup" && (
-        <>
-          <input
-            type="text"
-            placeholder="First name"
-            value={name}
-            onChange={e => setName(e.target.value)}
-            required
-            style={{
-              width: "100%",
-              marginBottom: 12,
-              padding: 8,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Surname"
-            value={surname}
-            onChange={e => setSurname(e.target.value)}
-            required
-            style={{
-              width: "100%",
-              marginBottom: 12,
-              padding: 8,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          />
-          <input
-            type="url"
-            placeholder="LinkedIn URL"
-            value={linkedin}
-            onChange={e => setLinkedin(e.target.value)}
-            required
-            style={{
-              width: "100%",
-              marginBottom: 12,
-              padding: 8,
-              borderRadius: 6,
-              border: "1px solid #ccc",
-            }}
-          />
-        </>
-      )}
 
-      {mode !== "forgot" && (
+
+      <form onSubmit={handleLogin} style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         <input
-          type="password"
-          placeholder="Password"
-          value={password}
+          type="email"
+          placeholder="Email"
+          value={email}
           required
-          onChange={e => setPassword(e.target.value)}
-          style={{
-            width: "100%",
-            marginBottom: 12,
-            padding: 8,
-            borderRadius: 6,
-            border: "1px solid #ccc",
-          }}
+          onChange={e => setEmail(e.target.value)}
+          style={inputStyle}
         />
-      )}
 
-      <button
-        type="submit"
-        style={{
-          width: "100%",
-          padding: 10,
-          borderRadius: 6,
-          background: "#4f46e5",
-          color: "#fff",
-          border: "none",
-          marginBottom: 12,
-          fontWeight: 600,
-          fontSize: 16,
-          cursor: "pointer",
-        }}
-      >
-        {mode === "login" && "Login"}
-        {mode === "signup" && "Sign Up"}
-        {mode === "forgot" && "Reset Password"}
-      </button>
-
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: mode !== "forgot" ? "16px" : "0" }}>
-        {mode !== "forgot" && (
-          <span
-            style={{ color: "#4f46e5", cursor: "pointer", fontSize: 14 }}
-            onClick={() => setMode("forgot")}
-          >
-            Forgot?
-          </span>
+        {mode === "signup" && (
+          <>
+            <input type="text" placeholder="First name" value={name} onChange={e => setName(e.target.value)} required style={inputStyle} />
+            <input type="text" placeholder="Surname" value={surname} onChange={e => setSurname(e.target.value)} required style={inputStyle} />
+            <input type="url" placeholder="LinkedIn URL" value={linkedin} onChange={e => setLinkedin(e.target.value)} required style={inputStyle} />
+          </>
         )}
-        <span style={{ fontSize: 14 }}>
+
+        {mode !== "forgot" && (
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            required
+            onChange={e => setPassword(e.target.value)}
+            style={inputStyle}
+          />
+        )}
+
+        <button type="submit" style={buttonStyle}>
+          {mode === "login" && "Login"}
+          {mode === "signup" && "Sign Up"}
+          {mode === "forgot" && "Reset Password"}
+        </button>
+        å
+        <div style={{ fontSize: "0.9rem", marginTop: "0.5rem", color: "#c8c8c8" }}>
+          {mode !== "forgot" && (
+            <span onClick={() => setMode("forgot")} style={linkStyle}>Forgot?</span>
+          )}
           {mode === "login" && (
-            <>
-              No account?{" "}
-              <span
-                style={{ color: "#4f46e5", cursor: "pointer" }}
-                onClick={() => setMode("signup")}
-              >
-                Sign up
-              </span>
-            </>
+            <div>
+              No account? <span onClick={() => setMode("signup")} style={linkStyle}>Sign up</span>
+            </div>
           )}
           {mode === "signup" && (
-            <>
-              Already have an account?{" "}
-              <span
-                style={{ color: "#4f46e5", cursor: "pointer" }}
-                onClick={() => setMode("login")}
-              >
-                Login
-              </span>
-            </>
+            <div>
+              Already have an account? <span onClick={() => setMode("login")} style={linkStyle}>Login</span>
+            </div>
           )}
           {mode === "forgot" && (
-            <>
-              Remembered?{" "}
-              <span
-                style={{ color: "#4f46e5", cursor: "pointer" }}
-                onClick={() => setMode("login")}
-              >
-                Login
-              </span>
-            </>
+            <div>
+              Remembered? <span onClick={() => setMode("login")} style={linkStyle}>Login</span>
+            </div>
           )}
-        </span>
-      </div>
-
-      {message && (
-        <div style={{ marginTop: 12, color: message.toLowerCase().includes("error") ? "red" : "green" }}>
-          {message}
         </div>
-      )}
-    </form>
+
+        {message && (
+          <div style={{ marginTop: "1rem", color: message.toLowerCase().includes("error") ? "#dc2626" : "#0ccf83" }}>
+            {message}
+          </div>
+        )}
+      </form>
+    </div>
   );
 }
+
+const inputStyle: React.CSSProperties = {
+  padding: "0.75rem 1rem",
+  borderRadius: "999px",
+  border: "1px solid #ccc",
+  fontSize: "1rem",
+  width: "100%",
+};
+
+const buttonStyle: React.CSSProperties = {
+  background: "#0ccf83",
+  color: "#000",
+  fontWeight: 600,
+  borderRadius: "999px",
+  padding: "0.75rem 1.5rem",
+  border: "none",
+  cursor: "pointer",
+  fontSize: "1rem",
+  alignSelf: "center",
+};
+const linkStyle: React.CSSProperties = {
+  color: "#0ccf83",
+  cursor: "pointer",
+  fontWeight: 500,
+};
