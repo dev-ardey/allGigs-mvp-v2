@@ -32,7 +32,7 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="job-board-container" style={{ maxWidth: 420, margin: "4rem auto", textAlign: "center" }}>
+    <div className="job-board-container" style={{ maxWidth: 520, margin: "4rem auto", textAlign: "center" }}>
       <img src="/images/allGigs-logo-white.svg" alt="AllGigs Logo" style={{ height: "70px", marginBottom: "1.5rem" }} />
       <p style={{
         color: "#c8c8c8",
@@ -45,7 +45,7 @@ export default function LoginForm() {
         maxWidth: "100%",
         textAlign: "center"
       }}>
-        Discover your next opportunity from <span style={{ fontWeight: "bold", color: "#0ccf83" }}>1000+</span> curated positions
+        Discover your next opportunity from <span style={{ fontWeight: "bold", color: "#0ccf83" }}>1000</span> curated positions
       </p>
 
 
