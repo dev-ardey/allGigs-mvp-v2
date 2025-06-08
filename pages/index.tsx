@@ -1329,7 +1329,7 @@ export default function JobBoard() {
                 onClick={() => setPage(num)}
                 style={{
                   ...paginationButtonStyle,
-                  backgroundColor: num === page ? "#4f46e5" : "#fff",
+                  backgroundColor: num === page ? "#0ccf83" : "#fff",
                   color: num === page ? "#fff" : "#000",
                   fontWeight: num === page ? "bold" : "normal",
                 }}
