@@ -1,5 +1,12 @@
 // Jobs.tsx verplaatst naar index.tsx zodat je niet een /jobs hebt in je URL
 
+export default function JobsPage() {
+  return (
+    <div>
+      <h1>AllGigs</h1>
+    </div>
+  );
+}
 
 
 
